@@ -43,11 +43,29 @@ public class Main {
 			    //여기에 과연 무엇을 넣어야 하나
 		//} 
 			while (true) {
-			int customerIDNumber = 0;  														// 주민등록번호
+			long customerIDNumber = 0;  														// 주민등록번호
 			int ticketSelect = 0, orderCount = 0, discountSelect = 0;    // 권종, 주문 갯수, 우대사항
 			int priceResult = 0, age = 0;  														// 가격, 나이		
 			int continueSelect = 0;                                                                 // 이어서 주문
 		}
+			
+	public int inputTicketSelect() {
+		int ticketSelect = 0;
+		System.out.println("권종을 선택하세요.\n" + "1. 주간권\n" + "2. 야간권");
+		while (true) {
+			ticketSelect = sc.nextInt();
+			if (ticketSelect == 1 || ticketSelect == 2) {
+				break;
+			} else {
+				//errorMessagePrint();
+			}
+			get
+		}
+	}
+			
+			public void inputData(int ticketSelect, long customerIDNumber, int orderCount, int discountSelect)	{
+		
+	}
 
 			/*System.out.println("권종을 선택하세요.\n" + "1. 주간권\n" + "2. 야간권");
 			int num1 = sc.nextInt(); // 주간권, 야간권 번호 입력
