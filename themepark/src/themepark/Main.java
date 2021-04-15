@@ -32,10 +32,10 @@ public class Main {
 		// 최대 주문량
 		int count_Max = 10, count_Min = 1;
 		
-		int totalPrice = 0;
-		int position = 0;
-		int fileposition = 0;
-		int reportPosition = 0;
+		int totalPrice = 0;  // 주문 총액
+		int position = 0;    // 주문 내역 배열 탐색용
+		int fileposition = 0;  // 파일 출력 첫 줄 구분
+		int reportPosition = 0;  
 		int[][] orderList = new int [100][5];
 		int isExit = 0;
 		
@@ -58,9 +58,9 @@ public class Main {
 				break;
 			} else {
 				//errorMessagePrint();
-			}
-			get
+			}		
 		}
+		return ticketSelect;
 	}
 			
 			public void inputData(int ticketSelect, long customerIDNumber, int orderCount, int discountSelect)	{
