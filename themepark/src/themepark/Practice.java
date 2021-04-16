@@ -1,35 +1,10 @@
 package themepark;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Practice {
-	static Scanner sc = new Scanner(System.in);
-	// 나이별 입장요금
-	static int baby_Price = 0;
-	static int child_Day_Price = 46000, child_After4_Price = 35000;
-	static int teen_Day_Price = 50000, teen_After4_Price = 40000;
-	static int adult_Day_Price = 56000, adult_After4_Price = 45000;
-	static int old_Day_Price = 46000, old_After4_Price = 35000;	
-	// 주민번호 분석
-	static long full_Digit = 10000000000000L;     //14자리
-	static long full_Digit_Min = 10000000000L;  // 11자리
-	static int seven_Digit = 1000000;
-	static int two_Digit = 100, one_Digit = 10, old_Generation = 1900, new_Generation = 2000, male_Old = 1,
-			female_Old = 2, male_New = 3, female_New = 4, before_Birth = 2, after_Birth = 1;
-	// 나이 범위
-	static int baby_Min = 1, child_Min = 3, teen_Min = 13, adult_Min = 19, child_Max = 12, teen_Max = 18,
-			adult_Max = 64;
-	// 나이에 따른 그룹 번호
-	static int baby = 1, child = 2, teen = 3, adult = 4, old = 5;
-	// 할인율(성인 요금 기준 장애인: 50%, 국가유공자 50%, 다자녀 30%, 임산부 50%)
-	static float disable_Discount_Rate = 0.5f, merit_Discount_Rate = 0.5f, pregnant_Discount_Rate = 0.5f,
-			multichile_Discount_Rate = 0.7f;
-	// 최대 주문량
-	static int count_Max = 10, count_Min = 1;
-			
+	static Scanner sc = new Scanner(System.in);	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int totalPrice = 0; // 주문 총액
@@ -72,7 +47,7 @@ public class Practice {
 			System.out.println("주민번호를 입력하세요.");
 			long customerIDNumber = sc.nextInt(); // 주민번호 입력
 			while (true) {
-				if (customerIDNumber >= full_Digit_Min && customerIDNumber < full_Digit) {     // 11<=customID<14
+				if (customerIDNumber >= ConstValueClass.full_Digit_Min && customerIDNumber < ConstValueClass.full_Digit) {     // 11<=customID<14
 					break;
 				} else {
 					//printErrorMessage();
@@ -86,7 +61,7 @@ public class Practice {
 			System.out.println("몇 개를 주문하시겠습니까? (최대 10개)");
 			while (true) {
 				orderCount = sc.nextInt();
-				if (orderCount <= count_Max && orderCount >= count_Min) {
+				if (orderCount <= ConstValueClass.count_Max && orderCount >= ConstValueClass.count_Min) {
 					break;
 				} else {
 					//printErrorMessage();
@@ -123,86 +98,86 @@ public class Practice {
 			int type = 0;  // 구매자 성별 및 2000년생 구분
 			int koreanAge = 0, age = 0;
 			
-			customID += full_Digit;  // 앞자리 보존 위해 해당값 더함(19505262169711)
-			calcIDNumber = (int) (customID / seven_Digit);   // ex)19505262
+			customID += ConstValueClass.full_Digit;  // 앞자리 보존 위해 해당값 더함(19505262169711)
+			calcIDNumber = (int) (customID / ConstValueClass.seven_Digit);   // ex)19505262
 			type = (int) (calcIDNumber % 10);  //뒷자리 첫 번호 추출 ex) 2
 			
-			calcIDNumber = calcIDNumber / one_Digit;   // ex)19505262 / 10 = 1950526
-			customDay = (int) (calcIDNumber % two_Digit);  // 일 계산 ex)1950526 % 100 = 26
+			calcIDNumber = calcIDNumber / ConstValueClass.one_Digit;   // ex)19505262 / 10 = 1950526
+			customDay = (int) (calcIDNumber % ConstValueClass.two_Digit);  // 일 계산 ex)1950526 % 100 = 26
 			
-			calcIDNumber = calcIDNumber / two_Digit;  // ex)1950526 / 100 = 19505
-			customMonth = (int) (calcIDNumber % two_Digit);  // 월 계산 ex)19505 % 100 = 5
+			calcIDNumber = calcIDNumber / ConstValueClass.two_Digit;  // ex)1950526 / 100 = 19505
+			customMonth = (int) (calcIDNumber % ConstValueClass.two_Digit);  // 월 계산 ex)19505 % 100 = 5
 			
-			calcIDNumber = calcIDNumber / two_Digit;  // ex)19505 / 100 = 195
-			customYear = (int) (calcIDNumber % two_Digit);  // 생년 계산 ex)195 % 100 = 95
+			calcIDNumber = calcIDNumber / ConstValueClass.two_Digit;  // ex)19505 / 100 = 195
+			customYear = (int) (calcIDNumber % ConstValueClass.two_Digit);  // 생년 계산 ex)195 % 100 = 95
 			
-			if (type == male_New ||type == female_New) {
-				customYear += new_Generation;   // 2000년생 이상인 경우 2000 더함
+			if (type == ConstValueClass.male_New ||type == ConstValueClass.female_New) {
+				customYear += ConstValueClass.new_Generation;   // 2000년생 이상인 경우 2000 더함
 			} else {
-				customYear += old_Generation;   // 아닌 경우 1900 더함
+				customYear += ConstValueClass.old_Generation;   // 아닌 경우 1900 더함
 			}
 			
 			Calendar cal = Calendar.getInstance();
-			//cal.add(Calendar.YEAR, -2000);
 			cal.get(Calendar.YEAR);  // 현재 년도
 			cal.get((Calendar.MONTH) + 1);  // 현재 월
 			cal.get(Calendar.DATE); // 현재 일			
 			koreanAge = cal.get(Calendar.YEAR) - customYear + 1;  // 한국식 나이
 			
 			if (customMonth < todayMonth || customMonth == todayMonth && customDay <= todayDay) {
-				age = koreanAge - after_Birth;  // 생일 안지났기 때문에 2살 차감
+				age = koreanAge - ConstValueClass.after_Birth;  // 생일 안지났기 때문에 2살 차감
 			} else {
-				age = koreanAge - before_Birth;  // 생일 지났기 때문에 1살 차감
+				age = koreanAge - ConstValueClass.before_Birth;  // 생일 지났기 때문에 1살 차감
 			}	
 			return age;
 		}
 			// 연령대별 분류
-			public static int calcAgeGroup(int age) {				
-				if (age < child_Min)	{  
-					return 1;   //int baby = 1, child = 2, teen = 3, adult = 4, old = 5;
-				} else if (age >= child_Min && age <= child_Max) {
-					return 2;
-				} else if (age >= teen_Min && age <= teen_Max) {
-					return 3;
-				} else if (age >= adult_Min && age <= adult_Max ) {
-					return 4;
-				} else if (age >adult_Max) {
-					return 5;
+			public static int calcAgeGroup(int age) {
+				// int baby = 1, child = 2, teen = 3, adult = 4, old = 5;
+				if (age < ConstValueClass.child_Min) {
+					return ConstValueClass.baby;
+				} else if (age >= ConstValueClass.child_Min && age <= ConstValueClass.child_Max) {
+					return ConstValueClass.child;
+				} else if (age >= ConstValueClass.teen_Min && age <= ConstValueClass.teen_Max) {
+					return ConstValueClass.teen;
+				} else if (age >= ConstValueClass.adult_Min && age <= ConstValueClass.adult_Max) {
+					return ConstValueClass.adult;
+				} else if (age > ConstValueClass.adult_Max) {
+					return ConstValueClass.old;
 				}
 				return age;
 			}
 			// 권종과 나이에 따른 금액 계산
 			public static int calcPriceProcess(int age, int ticketSelect) {
 				int calcPrice = 0;
-				if (calcAgeGroup(age) == baby) {
-					calcPrice = baby_Price;
+				if (calcAgeGroup(age) == ConstValueClass.baby) {
+					calcPrice = ConstValueClass.baby_Price;
 				} 
-				else if (calcAgeGroup(age) == child) {
+				else if (calcAgeGroup(age) == ConstValueClass.child) {
 					if (ticketSelect == 1) {
-						calcPrice = child_Day_Price;
+						calcPrice = ConstValueClass.child_Day_Price;
 					} else if (ticketSelect == 2) {
-						calcPrice = child_After4_Price ;
+						calcPrice = ConstValueClass.child_After4_Price ;
 					}
 				}
-				else if (calcAgeGroup(age) == teen) {
+				else if (calcAgeGroup(age) == ConstValueClass.teen) {
 					if (ticketSelect == 1) {
-						calcPrice = teen_Day_Price;
+						calcPrice = ConstValueClass.teen_Day_Price;
 					} else if (ticketSelect == 2) {
-						calcPrice = teen_After4_Price ;
+						calcPrice = ConstValueClass.teen_After4_Price ;
 					}
 				}
-				else if (calcAgeGroup(age) == adult) {
+				else if (calcAgeGroup(age) == ConstValueClass.adult) {
 					if (ticketSelect == 1) {
-						calcPrice = adult_Day_Price;
+						calcPrice = ConstValueClass.adult_Day_Price;
 					} else if (ticketSelect == 2) {
-						calcPrice = adult_After4_Price ;
+						calcPrice = ConstValueClass.adult_After4_Price ;
 					}
 				}
 				else {
 					if (ticketSelect == 1) {
-						calcPrice = old_Day_Price;
+						calcPrice = ConstValueClass.old_Day_Price;
 					} else if (ticketSelect == 2) {
-						calcPrice = old_After4_Price ;
+						calcPrice = ConstValueClass.old_After4_Price ;
 					}
 				}
 				return calcPrice;				
@@ -211,17 +186,17 @@ public class Practice {
 			//우대사항에 따른 할인 계산
 			public static int calcDiscount(int calcPrice, int discountSelect) {
 				switch (discountSelect) {
-				case 2:
-					calcPrice = (int) (calcPrice * disable_Discount_Rate);
+				case 2:  // 장애인
+					calcPrice = (int) (calcPrice * ConstValueClass.disable_Discount_Rate);
 					break;
-				case 3:
-					calcPrice = (int) (calcPrice * merit_Discount_Rate);
+				case 3:  // 국가유공자
+					calcPrice = (int) (calcPrice * ConstValueClass.merit_Discount_Rate);
 					break;
-				case 4:
-					calcPrice = (int) (calcPrice * multichile_Discount_Rate);
+				case 4:  // 다자녀
+					calcPrice = (int) (calcPrice * ConstValueClass.multichile_Discount_Rate);
 					break;
-				case 5:
-					calcPrice = (int) (calcPrice * pregnant_Discount_Rate);
+				case 5:  // 임산부
+					calcPrice = (int) (calcPrice * ConstValueClass.pregnant_Discount_Rate);
 					break;
 				default:
 					break;
