@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class OutputClass {
-	// 발권 중 중간 내역 출력
+	// 가격 내역 출력
 		public static void printResult(String ticketSelect_Zone , String sort, int totalPrice, int ticketnum) {
 			System.out.printf("가격은 %d원 입니다.\n", totalPrice);		
 		}
@@ -31,7 +31,7 @@ public class OutputClass {
 				return result;
 			}
 		}
-		// 발권 끝낼 시 총 내역 출력
+		// 내역 출력
 		public static void printDetail(int ticketType, String sort, int totalPrice, int ticketNum, 
 													 String result, ArrayList<OrderInfo> orderListArray) {
 			System.out.println("=========  polypoly world  =========");
@@ -60,16 +60,14 @@ public class OutputClass {
 			orderListArray.add(infoset);
 		}
 		//파일 저장
-		public static void Ordersave(String tZone, String sort, int finalPrice, int ticketNum, String result) throws IOException {
+		public static void Ordersave(String ticketSelect_Zone, String sort, int finalPrice, int ticketNum, String result) throws IOException {
 			
-			SaveList.list(String.valueOf(tZone));
+			SaveList.list(String.valueOf(ticketSelect_Zone));
 			SaveList.list(String.valueOf(sort));
 			SaveList.list(String.valueOf(ticketNum));			
 			SaveList.list(String.valueOf(finalPrice));
-			SaveList.reason(result);
-			
-		}
-		
-	} //class종료
+			SaveList.reason(result);			
+		}		
+	} 
 
 
