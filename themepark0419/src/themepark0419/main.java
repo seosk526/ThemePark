@@ -18,9 +18,9 @@ public class main {
 		
 		InputClass input = new InputClass();
 		
-		SaveOrder.head();
+		SaveList.head();
 		do {
-			SaveOrder.date();
+			SaveList.date();
 			ticketSelect = input.inputTicketSelect();  // 권종 입력
 			customerIDNumber = input.inputCustomerIDNumber(); // 주민번호 입력 
 			age = ProcessClass.calcAge(customerIDNumber); // 나이 계산
@@ -32,8 +32,8 @@ public class main {
 			finalPrice = ProcessClass.calcPriceResult(orderCount, discountPrice); // 최종가격 측정
 			finalPrice = ProcessClass.priceResult(customerIDNumber, ticketSelect, discountSelect, orderCount, age, finalPrice);
 			// totalPrice 측정
-			ticketSelect_Zone = Div.t_zone(ticketSelect);
-			sort = Div.divage(age);
+			ticketSelect_Zone = ZoneSortClass.t_zone(ticketSelect);
+			sort = ZoneSortClass.divage(age);
 			result = OutputClass.reason(discountSelect);
 			OutputClass.printResult(ticketSelect_Zone, sort, finalPrice, orderCount);
 			OutputClass.savelist(ticketSelect, sort, finalPrice, orderCount, result, orderinfo);

@@ -10,9 +10,6 @@ public class ConstValueClass {
 		// 할인율(성인 요금 기준 장애인: 50%, 국가유공자 50%, 다자녀 30%, 임산부 50%)
 		public static final double disable_Discount_Rate = 0.5, merit_Discount_Rate = 0.5, pregnant_Discount_Rate = 0.5,
 				multichile_Discount_Rate = 0.7;
-		// 종일권 야간권 택
-		public static final int select_day = 1;
-		public static final int select_night = 2;
 		// 나이에 따른 그룹 번호
 		public static final int baby = 1, child = 2, teen = 3, adult = 4, old = 5;
 		// 나이 범위

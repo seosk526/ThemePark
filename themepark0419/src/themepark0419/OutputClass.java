@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class OutputClass {
 	// 발권 중 중간 내역 출력
-		public static void printResult(String tZone , String sort, int totalPrice, int ticketnum) {
+		public static void printResult(String ticketSelect_Zone , String sort, int totalPrice, int ticketnum) {
 			System.out.printf("가격은 %d원 입니다.\n", totalPrice);		
 		}
 		// 우대 사유 출력
@@ -45,7 +45,7 @@ public class OutputClass {
 				System.out.println(text);			
 			} 
 		}
-		// 발권 끝낼 시 총 내역 리스트 저장 메서드
+		// 총 내역 저장 메서드
 		public static void savelist(int ticketType, String sort, int totalPrice, int ticketNum, 
 				 					String result, ArrayList<OrderInfo> orderListArray) {			
 			
@@ -59,14 +59,14 @@ public class OutputClass {
 				
 			orderListArray.add(infoset);
 		}
-		//파일 저장 메서드
+		//파일 저장
 		public static void Ordersave(String tZone, String sort, int finalPrice, int ticketNum, String result) throws IOException {
 			
-			SaveOrder.list(String.valueOf(tZone));
-			SaveOrder.list(String.valueOf(sort));
-			SaveOrder.list(String.valueOf(ticketNum));			
-			SaveOrder.list(String.valueOf(finalPrice));
-			SaveOrder.reason(result);
+			SaveList.list(String.valueOf(tZone));
+			SaveList.list(String.valueOf(sort));
+			SaveList.list(String.valueOf(ticketNum));			
+			SaveList.list(String.valueOf(finalPrice));
+			SaveList.reason(result);
 			
 		}
 		
