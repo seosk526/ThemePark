@@ -9,7 +9,7 @@ public class main {
 		// TODO Auto-generated method stub
 		ArrayList<OrderInfo> orderinfo = new ArrayList<OrderInfo>();
 		
-		int ticketSelect = 0, orderCount = 0, discountSelect = 0, moreSelect = 0;
+		int ticketSelect = 0, orderCount = 0, discountSelect = 0, moreSelect = 0, totalPrice = 0; 
 		String customerIDNumber = null;
 		
 		int ticketPrice, discountPrice, finalPrice, age;
@@ -34,7 +34,7 @@ public class main {
 
 			finalPrice = ProcessClass.calcPriceResult(orderCount, discountPrice); // 최종가격 측정
 
-			finalPrice = ProcessClass.priceResult(customerIDNumber, ticketSelect, discountSelect, orderCount, age, finalPrice);
+			totalPrice = ProcessClass.priceResult(customerIDNumber, ticketSelect, discountSelect, orderCount, age, finalPrice);
 			// totalPrice 측정
 			ticketSelect_Zone = ZoneSortClass.t_zone(ticketSelect);
 			sort = ZoneSortClass.divage(age);
