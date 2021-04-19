@@ -1,5 +1,7 @@
 package themepark0419;
 
+import java.io.File;
+
 public class ConstValueClass {
 	// 나이별 입장요금
 		public static final int baby_Price = 0;
@@ -19,4 +21,6 @@ public class ConstValueClass {
 		public static double personalNum = 0;
 		public static final int OLD_GEN = 1900;
 		public static final int NEW_GEN = 2000;
+		
+		static File file = new File("test.txt");
 }
