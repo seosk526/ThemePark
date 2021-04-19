@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class SaveList {
-	static File file = new File("C:\\Users\\강세영\\Desktop\\test.txt");
+	static File file = new File("test.txt");
 	static FileWriter fw = null;
 	static BufferedWriter br = null;
 	static Calendar cal = Calendar.getInstance();

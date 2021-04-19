@@ -27,14 +27,19 @@ public class main {
 			orderCount = input.inputOrderCount(); // 티켓 수량 입력
 			
 			ticketPrice = ProcessClass.calcPriceProcess(ticketSelect, age); // 권종별 가격 측정
+	
 			discountSelect = input.inputDiscountSelect(); // 우대사항 입력
+
 			discountPrice = ProcessClass.discount(ticketPrice, discountSelect); // 우대사항 적용된 가격 측정
+
 			finalPrice = ProcessClass.calcPriceResult(orderCount, discountPrice); // 최종가격 측정
+
 			finalPrice = ProcessClass.priceResult(customerIDNumber, ticketSelect, discountSelect, orderCount, age, finalPrice);
 			// totalPrice 측정
 			ticketSelect_Zone = ZoneSortClass.t_zone(ticketSelect);
 			sort = ZoneSortClass.divage(age);
 			result = OutputClass.reason(discountSelect);
+			
 			OutputClass.printResult(ticketSelect_Zone, sort, finalPrice, orderCount);
 			OutputClass.savelist(ticketSelect, sort, finalPrice, orderCount, result, orderinfo);
 			
